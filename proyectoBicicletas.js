@@ -7,7 +7,7 @@ var margin = {top: 20, right: 20, bottom: 70, left: 40},
 // Parse the date / time
 
 
-var x = d3.scale.ordinal().rangeBand([0, width], 0.1);
+var x = d3.scale.ordinal().doman(0,width);
 
 var y = d3.scale.linear().range([height, 0]);
 
@@ -28,12 +28,17 @@ var svg = d3.select("body").append("svg")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("/Data/Data.csv", function(error, data) {
+d3.csv("/Data/Data.csv", function(d){
+	return
+	{
+		Localidad: d.Localidad;
+		Total_UPZ: +d.Total_UPZ;
+	};
 
-    data.forEach(function(d) {
-        d.Localidad = d.Localidad;
-        d.Total_UPZ = +d.Total_UPZ;
-    });
+}, function(data)
+{
+	console.log(data[0]);
+});
 	
   x.domain(data.map(function(d) { return d.Localidad; }));
   y.domain([0, d3.max(data, function(d) { return d.Total_UPZ; })]);
@@ -67,5 +72,4 @@ d3.csv("/Data/Data.csv", function(error, data) {
       .attr("y", function(d) { return y(d.Total_UPZ); })
       .attr("height", function(d) { return height - y(d.Total_UPZ); });
 
-});
 
