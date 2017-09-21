@@ -3,13 +3,13 @@
 var margin = {top: 20, right: 20, bottom: 70, left: 40},
     width = 600 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
+ 
+var myData = ['Usaquen','Chapinero','Santa Fe','San Cristobal','Usme','Tunjuelito','Bosa','Kennedy','Fontibon','Engativa','Suba','Barrios Unidos','Teusaquillo','Los Martires','Antonio Nariño','Puente Aranda','Candelaria','Rafael Uribe Uribe','Ciudad Bolivar','No Location'];
 
-// Parse the date / time
 
+var x = d3.scaleOrdinal().domain(myData).range(['black','#ccc','#ccc']);
 
-var x = d3.scale.ordinal().doman(0,width);
-
-var y = d3.scale.linear().range([height, 0]);
+var y = d3.scaleLinear().range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
